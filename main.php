@@ -2,53 +2,32 @@
 /**
  * @date 2021-04-21
  * @deprecated learning
- * @author lyz
+ * @author sys-lyz
  * @brief demo
  * */
 
-// namespace www\doController;
+namespace vasicsForPHP\main;
 
 date_default_timezone_set('PRC');
 error_reporting(E_ALL || ~E_NOTICE);
 
-include_once('/usr/local/var/www/930bar-new/ThinkPHP/Common/functions.php');
-//冒泡排序
-// function paixu($arr)
-// {
-//     $len = count($arr);
-//     for ($i = 0; $i < $len - 1; $i++) {//循环比对的轮数
-//         for ($j = $i + 1; $j < $len; $j++) {//从第二个开始循环，循环到最后一个，逐一和第一个比较
-//             if ($arr[$i] > $arr[$j]) {//前边大于后边的则交换
-//                 $tmp = $arr[$i];
-//                 $arr[$i] = $arr[$j];
-//                 $arr[$j] = $tmp;
-//             }
-//         }
-//     }
-//     return $arr;
-// }
 
-//快排算法
-function quickSort($arr)
-{
-    $count = count($arr);
-    if ($count <= 1) {
-        return $arr;
-    }
-    $index = $arr[0];
-    $left = [];
-    $right = [];
-    for ($i = 1; $i < $count; $i++) {
-        if ($arr[$i] < $index) {
-            $left[] = $arr[$i];
-        } else {
-            $right[] = $arr[$i];
-        }
-    }
-    $left  = quickSort($left);
-    $right = quickSort($right);
-    return array_merge($left, [$arr[0]], $right);
-}
+//use thinkphp funcion->dump()
+include_once('/usr/local/var/www/930bar-new/ThinkPHP/Common/functions.php');
+
+// include_once('/usr/local/var/www/basicsForPHP/FileOperation.php');
+//
+// $file = new File();
+//
+// $res = $file->getFileCountBackWards('/tmp/xxxx.c',10);
+// dump($res);
+
+// include_once('/usr/local/var/www/basicsForPHP/ArraySort.php');
+
+// $arr_sort = new ArraySort();
+
+// $a = [100,3,2,1,7,4,9];
+// dump($arr_sort->shellSort($a));die();
 
 
 interface th{
@@ -151,7 +130,6 @@ class KMP implements th{
         $n = strlen($Tstring); // 字符串
         $m = strlen($Pstring);
         $this->makeNext($Pstring,$next); // 计算模式匹配表
-        die();
 
         for ($i = 0, $q = 0; $i < $n; ++$i)
         {
