@@ -5,15 +5,13 @@
  * @author sys-lyz
  * @brief demo
  * */
+namespace vasicsForPHP;
 
-namespace vasicsForPHP\main;
+// date_default_timezone_set('PRC');
+// error_reporting(E_ALL || ~E_NOTICE);
 
-date_default_timezone_set('PRC');
-error_reporting(E_ALL || ~E_NOTICE);
-
-
-//use thinkphp funcion->dump()
-include_once('/usr/local/var/www/930bar-new/ThinkPHP/Common/functions.php');
+//use thinkphp function->dump()
+// include_once('/usr/local/var/www/930bar-new/ThinkPHP/Common/functions.php');
 
 // include_once('/usr/local/var/www/basicsForPHP/FileOperation.php');
 //
@@ -23,20 +21,77 @@ include_once('/usr/local/var/www/930bar-new/ThinkPHP/Common/functions.php');
 // dump($res);
 
 // include_once('/usr/local/var/www/basicsForPHP/ArraySort.php');
+// ini_set('memory_limit',-1);
+
+
+class countNumStep
+{
+    public static function contNum(int $step): int
+    {
+        if ($step === 1) {
+            return 1;
+        }
+
+        if ($step === 2) {
+            return 2;
+        }
+        return self::contNum($step - 1) + self::contNum($step - 2);
+    }
+}
+//
+// echo date('Y-m-d H:i:s') . PHP_EOL;
+$class = new countNumStep();
+echo $class::contNum(50) . PHP_EOL;
+// echo date('Y-m-d H:i:s') . PHP_EOL;
+// die();
+
+function adder()
+{
+    $sum = 100;
+    return function ($x) use ($sum) {
+        echo $sum . PHP_EOL;
+        $sum += $x;
+        return $sum;
+    };
+}
+
+$a = adder();
+$b = adder();
+for ($i = 0; $i < 10; $i++) {
+    echo $a($i);
+    echo $b(-2 * $i) . PHP_EOL;
+}
+
+die();
 
 // $arr_sort = new ArraySort();
+//
+// $a = [100,3,2,7,1,4,9];
+// dump($arr_sort->bubbleSort($a));die();
+use vasicsForPHP\ArraySort;
 
-// $a = [100,3,2,1,7,4,9];
-// dump($arr_sort->shellSort($a));die();
+class test
+{
+
+    public function index()
+    {
+        echo ArraySort::class;
+    }
+}
+
+(new test())->index();
+die();
 
 
-interface th{
+interface th
+{
     public function index();
     // public function kmpdo($Tstring, $Pstring, $next);
 }
 
 //php配置信息
-class phpinfo implements th{
+class phpinfo implements th
+{
 
     /**
      * @description 静态私有变量保存对象本身
@@ -52,7 +107,8 @@ class phpinfo implements th{
     {
     }
 
-    public function index(){
+    public function index()
+    {
         phpinfo();
     }
 
@@ -62,7 +118,7 @@ class phpinfo implements th{
      * */
     public static function getInstance()
     {
-        if( !isset(self::$_instance) ) {
+        if (!isset(self::$_instance)) {
             self::$_instance = new self();
         }
         return self::$_instance;
@@ -70,17 +126,24 @@ class phpinfo implements th{
 }
 
 $phpInfo = phpinfo::getInstance();
-$phpInfo->index();die();
+$phpInfo->index();
+die();
+
 // call_user_func(array('phpinfo','index'));die();
 
-class str implements th{
+class str implements th
+{
     public $ssss;
-    function filter($string){
-        $string = str_replace('x','zz',$string);
+
+    function filter($string)
+    {
+        $string = str_replace('x', 'zz', $string);
         return $string;
-            // str_replace('trple','',$string);
+        // str_replace('trple','',$string);
     }
-    function index(){
+
+    function index()
+    {
         $user = array('tr1ple', 'aaaaax');
 
         echo(serialize($user));
@@ -93,13 +156,14 @@ class str implements th{
 
         var_dump(unserialize($r));
         echo "<br/>";
-        $a='a:2:{i:0;s:6:"tr1ple";i:1;s:5:"aaaaa";}i:1;s:5:"aaaaa";';
+        $a = 'a:2:{i:0;s:6:"tr1ple";i:1;s:5:"aaaaa";}i:1;s:5:"aaaaa";';
         var_dump(unserialize($a));
     }
-    
-    function indexTwo(){
+
+    function indexTwo()
+    {
         $username = 'trpletrpletrpletrplexxxxxxxxxxxxxxxxxxxx";i:1;s:6:"123456";}'; //其中红色就是我们想要注入的属性值
-        $password="aaaaa";
+        $password = "aaaaa";
         $user = array($username, $password);
         $str = serialize($user);
         echo($str);
@@ -112,12 +176,16 @@ class str implements th{
         var_dump(unserialize($r));
     }
 }
+
 $str = new str;
-call_user_func([$str,'indexTwo']);die();
+call_user_func([$str, 'indexTwo']);
+die();
 
 //KMP算法
-class KMP implements th{
-    function index(){
+class KMP implements th
+{
+    function index()
+    {
         $next = array(0);
         $Tstring = "ababxbababcadfdsssabcdabdrwgewwrabcdabd";
         $Pstring = "abcdabd";
@@ -129,34 +197,30 @@ class KMP implements th{
     {
         $n = strlen($Tstring); // 字符串
         $m = strlen($Pstring);
-        $this->makeNext($Pstring,$next); // 计算模式匹配表
+        $this->makeNext($Pstring, $next); // 计算模式匹配表
 
-        for ($i = 0, $q = 0; $i < $n; ++$i)
-        {
-            while($q > 0 && $Pstring[$q] != $Tstring[$i])
-                $q = $next[$q-1];
-            if ($Pstring[$q] == $Tstring[$i])
-            {
+        for ($i = 0, $q = 0; $i < $n; ++$i) {
+            while ($q > 0 && $Pstring[$q] != $Tstring[$i])
+                $q = $next[$q - 1];
+            if ($Pstring[$q] == $Tstring[$i]) {
                 $q++;
             }
-            if ($q == $m)
-            {
-                printf("Pattern occurs with shift:%d ",($i - $m + 1));
+            if ($q == $m) {
+                printf("Pattern occurs with shift:%d ", ($i - $m + 1));
                 printf(" You find string is:%s\n", $Pstring);
                 echo "<br>";
             }
         }
     }
+
     public function makeNext($Pstring, &$next)
     {
         $m = strlen($Pstring); // 此时为数组
         $next[0] = 0;
-        for ($q = 1, $k = 0; $q < $m; ++$q)
-        {
-            while($k > 0 && $Pstring[$q] != $Pstring[$k])
-                $k = $next[$k-1];
-            if ($Pstring[$q] == $Pstring[$k])
-            {
+        for ($q = 1, $k = 0; $q < $m; ++$q) {
+            while ($k > 0 && $Pstring[$q] != $Pstring[$k])
+                $k = $next[$k - 1];
+            if ($Pstring[$q] == $Pstring[$k]) {
                 $k++;
             }
             $next[$q] = $k;
@@ -168,12 +232,16 @@ class KMP implements th{
         echo "<br>";
     }
 }
+
 $KMP = new KMP();
-call_user_func(array($KMP,'index'));die();
+call_user_func(array($KMP, 'index'));
+die();
 
 //bitMap算法
-class bitMap implements th{
-    function index(){
+class bitMap implements th
+{
+    function index()
+    {
         # 定义一个数据 开辟储存空间
         $arr = array_fill(0, 2, 0);      //申请一个整形数组, 2个元素, 初始化为整数0
         // $arr = [];
@@ -205,5 +273,6 @@ class bitMap implements th{
         var_dump($arr);
     }
 }
-call_user_func(array('bitMap','index'));
+
+call_user_func(array('bitMap', 'index'));
 

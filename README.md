@@ -10,9 +10,9 @@
 ## Background
 
 
->php v7.4.22
+> php v7.4.22
 > 
->redis 6.2.5
+> redis 6.2.5
 > 
 > nginx1.21.1
 > 
@@ -30,3 +30,6 @@ This project uses [php]() and [nginx]() and [redis](). Go check them out if you 
 
 [@lyz-sys](https://github.com/lyz-sys).
 
+Learning without thinking is lost, thinking without learning is dangerous
+
+Just do it

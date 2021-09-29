@@ -1,16 +1,16 @@
 <?php
 
-namespace vasicsForPHP\main;
+namespace vasicsForPHP;
 
 class ArraySort
 {
     /**
      * @public
-     * @description bubble sorting
+     * @description bubble sort
      * @param array $arr
      * @return array sorted array
      * */
-    public function bubbleSorting(array $arr = []): array
+    public function bubbleSort(array $arr = []): array
     {
         if (empty($arr)) {
             return $arr;
