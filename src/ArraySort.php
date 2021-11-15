@@ -1,6 +1,6 @@
 <?php
 
-namespace vasicsForPHP;
+namespace src;
 
 class ArraySort
 {

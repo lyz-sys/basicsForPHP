@@ -1,0 +1,27 @@
+{
+    "name": "php/base",
+    "type": "project",
+    "authors": [
+        {
+            "name": "lyz-sys",
+            "email": "linyuzheng0607@gmail.com"
+        }
+    ],
+    "require": {
+        "carbon-cli/carbon-cli": "^1.2",
+        "nesbot/carbon": "^2.54"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

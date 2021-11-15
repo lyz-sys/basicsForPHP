@@ -1,6 +1,6 @@
 <?php
 
-namespace vasicsForPHP\main;
+namespace src;
 
 class FileOperation
 {
