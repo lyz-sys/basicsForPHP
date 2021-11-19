@@ -1,6 +1,6 @@
 <?php
 
-namespace src;
+namespace learn\src;
 
 class Bitmap
 {

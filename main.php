@@ -1,18 +1,30 @@
 <?php
 
-use src\RedisSingle;
-
-require'vendor/autoload.php';
-
-date_default_timezone_set('Asia/Shanghai');
-error_reporting(E_ALL || ~E_NOTICE);
-
 /**
  * @date 2021-04-21
  * @deprecated learning
  * @author sys-lyz
  * @brief demo
  * */
+
+declare(strict_types=1);
+
+use learn\src\Bitmap;
+// use learn\src\SwooleDemo;
+
+ini_set('display_errors', 'on');
+ini_set('display_startup_errors', 'on');
+error_reporting(E_ALL);
+date_default_timezone_set('Asia/Shanghai');
+
+require'vendor/autoload.php';
+
+$swoole = new \learn\src\SwooleDemo();
+$swoole->setHost('127.0.0.1')->setPort(9501);
+// $swoole->tcp();
+// $swoole->udp();
+$swoole->http();
+// $swoole->websocket();
 
 // $carbonTest = new \src\CarbonTest();
 //
@@ -24,7 +36,7 @@ error_reporting(E_ALL || ~E_NOTICE);
 // echo $CountHowManyWays->contNum(50).PHP_EOL;
 // die();
 
-// $redis = RedisSingle::getInstance(2);
+// $redis = \src\RedisSingle::getInstance(2);
 // $redis->set('test',2222);
 // echo $redis->del('test');die();
 //
