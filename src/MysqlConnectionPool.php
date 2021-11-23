@@ -6,35 +6,48 @@ use ErrorException;
 
 class MysqlConnectionPool
 {
-    private $dbconfig = [
-        'host' => '127.0.0.1',
-        'user' => 'root',
-        'password' => 'root',
-        'database' => 'test'
+    private array $dbconfig = [
+        'host' => '',
+        'user' => '',
+        'password' => '',
+        'database' => ''
     ];
 
     /**
      * @var array
      * Connection pool
      * */
-    private $dbpool;
+    private array $dbpool;
 
     /**
      * @var int
      * Number of connections
      * */
-    public $poolsize;
+    public int $poolsize;
 
-    public function __construct($poolsize = 20)
+    public function __construct(int $poolsize = 20)
     {
-
-        // 准备好数据库连接池“伪队列”
         $this->poolsize = $poolsize;
-        $this->dbpool = array();
         for ($index = 1; $index <= $this->poolsize; $index++) {
-            $conn = mysqli_connect($this->dbconfig ['host'], $this->dbconfig ['user'], $this->dbconfig ['password'], $this->dbconfig ['database']) or die ("<mark>连接数据库失败！</mark><br />");
+            $conn = mysqli_connect($this->dbconfig ['host'], $this->dbconfig ['user'], $this->dbconfig ['password'], $this->dbconfig ['database']) or die ("<mark>Connection to Mysql failed！</mark><br />");
             $this->dbpool[] = $conn;
         }
+    }
+
+    /**
+     * @param array|string[] $dbconfig
+     */
+    public function setDbconfig(array $dbconfig): void
+    {
+        $this->dbconfig = $dbconfig;
+    }
+
+    /**
+     * @param int $poolsize
+     */
+    public function setPoolsize(int $poolsize): void
+    {
+        $this->poolsize = $poolsize;
     }
 
     /**
@@ -47,9 +60,9 @@ class MysqlConnectionPool
     {
         if (count($this->dbpool) <= 0) {
             throw new ErrorException ("<mark>There are no linked resources in the database connection pool, please try again later!</mark>");
-        } else {
-            return array_pop($this->dbpool);
         }
+
+        return array_pop($this->dbpool);
     }
 
     /**
@@ -58,7 +71,7 @@ class MysqlConnectionPool
      * @param $conn
      * @throws ErrorException
      */
-    public function release($conn)
+    public function release($conn): void
     {
         if (count($this->dbpool) >= $this->poolsize) {
             throw new ErrorException ("<mark>Database connection pool is full</mark><br />");

@@ -10,7 +10,9 @@
     "require": {
         "carbon-cli/carbon-cli": "^1.2",
         "nesbot/carbon": "^2.54",
-      "ext-mysqli": "*"
+      "ext-mysqli": "*",
+      "ext-json": "*",
+      "ext-redis": "*"
     }
     ,
     "require-dev": {

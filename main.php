@@ -19,11 +19,11 @@ date_default_timezone_set('Asia/Shanghai');
 
 require'vendor/autoload.php';
 
-$swoole = new \learn\src\SwooleDemo();
-$swoole->setHost('127.0.0.1')->setPort(9501);
+// $swoole = new \learn\src\SwooleDemo();
+// $swoole->setHost('127.0.0.1')->setPort(9501);
 // $swoole->tcp();
 // $swoole->udp();
-$swoole->http();
+// $swoole->http();
 // $swoole->websocket();
 
 // $carbonTest = new \src\CarbonTest();
