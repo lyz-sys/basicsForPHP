@@ -48,4 +48,8 @@ class RedisSingle
     {
         return $this->_redis->$method(...$ages);
     }
+
+    private function __clone()
+    {
+    }
 }
