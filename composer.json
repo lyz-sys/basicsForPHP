@@ -8,11 +8,12 @@
         }
     ],
     "require": {
+        "ext-json": "*",
+        "ext-mysqli": "*",
+        "ext-redis": "*",
         "carbon-cli/carbon-cli": "^1.2",
-        "nesbot/carbon": "^2.54",
-      "ext-mysqli": "*",
-      "ext-json": "*",
-      "ext-redis": "*"
+        "endroid/qr-code": "^4.4",
+        "nesbot/carbon": "^2.54"
     }
     ,
     "require-dev": {

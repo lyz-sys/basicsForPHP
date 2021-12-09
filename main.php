@@ -16,38 +16,14 @@ ini_set('display_startup_errors', 'on');
 error_reporting(E_ALL);
 date_default_timezone_set('Asia/Shanghai');
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-// $swoole = new src\SwooleDemo();
-// $swoole->setHost('127.0.0.1')->setPort(9501);
-// $swoole->tcp();
-// $swoole->udp();
-// $swoole->http();
-// $swoole->websocket();
+try {
+    (new src\User\SetUser())->init(['name' => 'self',
+        'email' => 'email@email.com',
+        'phone' => random_int(1000000, 10000000000)]);
+} catch (Exception $exception) {
+    throw new src\Exception\RunException('error');
+}
 
-// $carbonTest = new src\CarbonTest;
-// echo $carbonTest->handle('2021-11-11 11:11:11');
-// die();
-//
-// $CountHowManyWays = new src\CountHowManyWays();
-//
-// echo $CountHowManyWays->contNum(50).PHP_EOL;
-// die();
-
-// $redis = src\RedisSingle::getInstance(2);
-// $redis->set('test',2222);
-// echo $redis->del('test');die();
-//
-// $kmp = new src\Kmp();
-//
-// $kmp->index();die();
-
-// $bitmap = new src\Bitmap();
-// $bitmap->index();
-
-// $mysql = new src\MysqlConnectionPool(5);
-//
-// $conn = $mysql->getConn();
-// $result = $conn->query('SELECT * FROM demo where id=1 ');
-// var_dump($result->fetch_assoc());
-
+echo src\User\User::$name;

@@ -78,8 +78,8 @@ class SwooleDemo
             //根据 $controller, $action 映射到不同的控制器类和方法
             $response->header('Content-Type', 'text/html; charset=utf-8');
             try {
-                $controller = '\learn\src\\'.$controller;
-                $response->end((new $controller)->$action($request,$response));
+                $controller = '\learn\src\\' . $controller;
+                $response->end((new $controller)->$action($request, $response));
             } catch (\Exception $exception) {
                 $response->end('error');
                 var_dump($exception->getMessage());
