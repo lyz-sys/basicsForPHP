@@ -1,31 +1,38 @@
 {
-    "name": "php/base",
-    "type": "project",
-    "authors": [
-        {
-            "name": "lyz-sys",
-            "email": "linyuzheng0607@gmail.com"
-        }
-    ],
-    "require": {
-        "ext-json": "*",
-        "ext-mysqli": "*",
-        "ext-redis": "*",
-        "carbon-cli/carbon-cli": "^1.2",
-        "endroid/qr-code": "^4.4",
-        "nesbot/carbon": "^2.54"
+  "name": "php/base",
+  "type": "project",
+  "authors": [
+    {
+      "name": "lyz-sys",
+      "email": "linyuzheng0607@gmail.com"
     }
-    ,
-    "require-dev": {
-        "roave/security-advisories": "dev-latest"
+  ],
+  "require": {
+    "ext-json": "*",
+    "ext-mysqli": "*",
+    "ext-redis": "*",
+    "carbon-cli/carbon-cli": "^1.2",
+    "endroid/qr-code": "^4.4",
+    "nesbot/carbon": "^2.54",
+    "ext-curl": "*",
+    "ext-openssl": "*",
+    "ext-posix": "*",
+    "ext-pcntl": "*",
+    "ext-rdkafka": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "learn\\src\\": "src/"
     },
-    "autoload": {
-        "psr-4": {
-            "learn\\src\\": "src/"
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "sort-packages": true
-    }
+    "files": [
+      "src/Helper/function.php"
+    ]
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
 }

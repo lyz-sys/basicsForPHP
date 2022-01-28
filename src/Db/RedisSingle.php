@@ -2,6 +2,10 @@
 
 namespace learn\src\Db;
 
+use learn\src\Config\Redis as Config;
+use learn\src\Exception\RunException;
+use ReflectionClass;
+
 class RedisSingle
 {
     /**
@@ -17,15 +21,23 @@ class RedisSingle
     private \Redis $_redis;
 
     /**
+     * @description redis ReflectionClass
+     * @private
+     * */
+    private ReflectionClass $redisReflectionClass;
+
+    /**
      * @description Private constructs prevent direct new
      * @private
      * */
-    private function __construct(string $host, string $auth)
+    private function __construct()
     {
         try {
             $this->_redis = new \Redis();
-            $this->_redis->connect($host);
-            !empty($auth) && $this->_redis->auth($auth);
+            $this->redisReflectionClass = new ReflectionClass($this->_redis);
+            $this->_redis->connect(Config::$host, Config::$port);
+            !empty(Config::$auth) && $this->_redis->auth(Config::$auth);
+            $this->_redis->select(Config::$db);
         } catch (\Exception $e) {
             error_log('redis connection error' . $e->getMessage());
         }
@@ -35,18 +47,26 @@ class RedisSingle
      * @description get instance
      * @public
      * */
-    public static function getInstance(string $host, string $auth): self
+    public static function getInstance(): self
     {
         if (!isset(self::$_instance)) {
-            self::$_instance = new self($host, $auth);
+            self::$_instance = new self;
         }
 
         return self::$_instance;
     }
 
-    public function __call(string $method, $ages)
+    /**
+     * @throws \ReflectionException
+     * @throws RunException
+     */
+    public function __call(string $method, ...$arguments)
     {
-        return $this->_redis->$method(...$ages);
+        if (!$this->redisReflectionClass->hasMethod($method) || !$this->redisReflectionClass->getMethod($method)->isPublic()) {
+            throw new RunException('Method does not exist');
+        }
+
+        return $this->_redis->$method(...$arguments);
     }
 
     private function __clone()

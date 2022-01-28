@@ -27,7 +27,7 @@ class Bitmap
             $offset = 1 << $wei;            // 1是 00000001 ； 得到的余数 （位） 假设为3  则左移3位 得到 00001000
             // echo DecBin($offset);
             // echo '<br>';
-            $arr[$row] = $arr[$row] | $offset; // 将位改为1  标记储存数据
+            $arr[$row] |= $offset; // 将位改为1  标记储存数据
         }
         echo decbin($arr[0]);
         echo '<br>';

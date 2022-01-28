@@ -3,15 +3,10 @@
 namespace learn\src\Db;
 
 use ErrorException;
+use learn\src\Config\Mysql as Config;
 
-class MysqlConnectionPool
+class MysqliConnect
 {
-    private array $dbconfig = [
-        'host' => '',
-        'user' => '',
-        'password' => '',
-        'database' => ''
-    ];
 
     /**
      * @var array
@@ -28,18 +23,7 @@ class MysqlConnectionPool
     public function __construct(int $poolsize = 20)
     {
         $this->poolsize = $poolsize;
-        for ($index = 1; $index <= $this->poolsize; $index++) {
-            $conn = mysqli_connect($this->dbconfig ['host'], $this->dbconfig ['user'], $this->dbconfig ['password'], $this->dbconfig ['database']) or die ("<mark>Connection to Mysql failed！</mark><br />");
-            $this->dbpool[] = $conn;
-        }
-    }
-
-    /**
-     * @param array|string[] $dbconfig
-     */
-    public function setDbconfig(array $dbconfig): void
-    {
-        $this->dbconfig = $dbconfig;
+        $this->createDbPool();
     }
 
     /**
@@ -48,6 +32,17 @@ class MysqlConnectionPool
     public function setPoolsize(int $poolsize): void
     {
         $this->poolsize = $poolsize;
+    }
+
+    /**
+     *
+     * */
+    private function createDbPool(): void
+    {
+        for ($index = 1; $index <= $this->poolsize; $index++) {
+            $conn = mysqli_connect(Config::$host, Config::$username, Config::$password, Config::$database, Config::$port) or die ("<mark>Connection to Config failed！</mark><br />");
+            $this->dbpool[] = $conn;
+        }
     }
 
     /**
@@ -75,9 +70,9 @@ class MysqlConnectionPool
     {
         if (count($this->dbpool) >= $this->poolsize) {
             throw new ErrorException ("<mark>Database connection pool is full</mark><br />");
-        } else {
-            $this->dbpool[] = $conn;
         }
+
+        $this->dbpool[] = $conn;
     }
 
 }
