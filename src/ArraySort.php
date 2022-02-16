@@ -10,7 +10,7 @@ class ArraySort
      * @param array $arr
      * @return array sorted array
      * */
-    public function bubbleSort(array $arr = []): array
+    public function bubbleSort(array $arr): array
     {
         if (empty($arr)) {
             return $arr;
@@ -34,7 +34,7 @@ class ArraySort
      * @param array $arr
      * @return array sorted array
      * */
-    public function quickSort(array $arr = []): array
+    public function quickSort(array $arr): array
     {
         if (empty($arr)) {
             return $arr;
@@ -64,7 +64,7 @@ class ArraySort
      * @param array $arr
      * @return array sorted array
      * */
-    function insertSort(array $arr = []): array
+    function insertSort(array $arr): array
     {
         if (empty($arr)) {
             return $arr;
@@ -86,7 +86,7 @@ class ArraySort
      * @param array $arr
      * @return array sorted array
      * */
-    public function selectSort(array $arr = []): array
+    public function selectSort(array $arr): array
     {
         if (empty($arr)) {
             return $arr;
@@ -112,7 +112,7 @@ class ArraySort
      * @param array $arr
      * @return array sorted array
      * */
-    public function shellSort(array $arr = []): array
+    public function shellSort(array $arr): array
     {
         if (empty($arr)) {
             return $arr;
@@ -136,6 +136,7 @@ class ArraySort
 
 
     //todo next time
+
     /**
      * @public
      * @description heap sort
@@ -157,7 +158,7 @@ class ArraySort
      * @param array $arr
      * @return array sorted array
      * */
-    public function mergeSort(array $arr):array
+    public function mergeSort(array $arr): array
     {
         if (empty($arr)) {
             return $arr;
