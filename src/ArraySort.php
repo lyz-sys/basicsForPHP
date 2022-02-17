@@ -64,7 +64,7 @@ class ArraySort
      * @param array $arr
      * @return array sorted array
      * */
-    function insertSort(array $arr): array
+    public function insertSort(array $arr): array
     {
         if (empty($arr)) {
             return $arr;
@@ -93,7 +93,7 @@ class ArraySort
         }
         $new_array = [];
         for ($i = 0, $iMax = count($arr); $i < $iMax; $i++) {
-            // $min = min($arr);//use php function get min num
+            $arr = array_values($arr);
             $min = 0;
             for ($j = 1; $j < $iMax; $j++) {
                 if (array_key_exists($j, $arr) && $arr[$min] > $arr[$j]) {
@@ -120,7 +120,7 @@ class ArraySort
         $gap = count($arr) - 1;
         $max = count($arr) - 1;
         do {
-            $gap = $gap / 2;
+            $gap /= 2;
             for ($i = 0; $i <= $max - $gap; $i++) {
                 for ($j = $i; $j <= $max - $gap; $j += $gap) {
                     if ($arr[$j] > $arr[$j + $gap]) {
@@ -134,9 +134,6 @@ class ArraySort
         return $arr;
     }
 
-
-    //todo next time
-
     /**
      * @public
      * @description heap sort
@@ -148,10 +145,42 @@ class ArraySort
         if (empty($arr)) {
             return $arr;
         }
+        $funcHeap = static function (&$array, $i, $length) {
+            if ($i < 0) {
+                return false;
+            }
+            $tmp = $array[$i];
+            for ($j = $i * 2 + 1; $j < $length; $j = $j * 2 + 1) {
+                if ($j + 1 < $length && $array[$j] < $array[$j + 1]) {//右子节点比左子节点大
+                    $j++;
+                }
 
+                if ($array[$j] > $tmp) {
+                    //子节点比父节点大,则将子节点的值赋给父节点(不用交换)
+                    $array[$i] = $array[$j];
+                    $i = $j;
+                } else {
+                    break;
+                }
+            }
+            $array[$i] = $tmp;//实现交换(i有变化时) /*iii*/it
+        };
+
+        $count = count($arr);
+        for ($i = floor($count / 2) - 1; $i >= 0; $i--) {
+            $funcHeap($arr, $i, $count);
+
+        }
+        for ($j = $count - 1; $j >= 0; $j--) {
+            $tmp = $arr[0];
+            $arr[0] = $arr[$j];
+            $arr[$j] = $tmp;
+            $funcHeap($arr, 0, $j);
+        }
         return $arr;
     }
 
+    //todo next time
     /**
      * @public
      * @description heap sort
@@ -162,6 +191,15 @@ class ArraySort
     {
         if (empty($arr)) {
             return $arr;
+        }
+        $count = count($arr);
+        for ($gap = 1; $gap < $count; $gap *= 2) {
+            for ($i = 0; $i + $gap * 2 - 1 < $count; $i = $i + 2 * $gap) {
+
+            }
+            if ($i + $gap - 1 < $count) {
+
+            }
         }
 
         return $arr;
