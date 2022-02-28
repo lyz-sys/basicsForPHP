@@ -2,6 +2,7 @@
 
 namespace learn\src\Kafka;
 
+use learn\src\Config\Kafka;
 use learn\src\Exception\RunException;
 
 class Consumer
@@ -27,7 +28,7 @@ class Consumer
         });
         $conf->set('group.id', 'myConsumer');
 
-        $conf->set('metadata.broker.list', '127.0.0.1:9092');
+        $conf->set('metadata.broker.list', Kafka::$broker);
 
         $conf->set('fetch.wait.max.ms', 50);
         $conf->set('socket.timeout.ms', 1050);//1000ms greater than fetch.wait.max.ms

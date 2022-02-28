@@ -147,7 +147,7 @@ class ArraySort
         }
         $funcHeap = static function (&$array, $i, $length) {
             if ($i < 0) {
-                return false;
+                return;
             }
             $tmp = $array[$i];
             for ($j = $i * 2 + 1; $j < $length; $j = $j * 2 + 1) {

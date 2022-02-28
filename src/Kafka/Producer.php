@@ -2,6 +2,9 @@
 
 namespace learn\src\Kafka;
 
+use learn\src\Config\Kafka;
+use learn\src\Exception\RunException;
+
 class Producer
 {
     private \RdKafka\Producer $producer;
@@ -11,11 +14,10 @@ class Producer
     public function __construct()
     {
         $conf = new \RdKafka\Conf();
-        $conf->set('metadata.broker.list', '127.0.0.1:9092');
+        $conf->set('metadata.broker.list', Kafka::$broker);
         $conf->set('log_level', (string)LOG_DEBUG);
         $conf->set('debug', 'all');
         $this->producer = new \RdKafka\Producer($conf);
-        // $this->producer->addBrokers("127.0.0.1:9092");
         $topicConf = new \RdKafka\TopicConf();
         $topicConf->set('request.required.acks', 0);
         $this->topic = $this->producer->newTopic("test", $topicConf);
@@ -31,7 +33,7 @@ class Producer
         $result = $this->producer->flush(10000);
 
         if (RD_KAFKA_RESP_ERR_NO_ERROR !== $result) {
-            throw new \RuntimeException('Was unable to flush, messages might be lost!');
+            throw new RunException('Was unable to flush, messages might be lost!');
         }
     }
 
