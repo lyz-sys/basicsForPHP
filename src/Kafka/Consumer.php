@@ -28,7 +28,6 @@ class Consumer
                     $kafka->assign(NULL);
                     break;
                 default:
-                    var_dump(112123123);
                     throw new RunException($err);
             }
         });
