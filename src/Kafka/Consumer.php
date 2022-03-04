@@ -12,38 +12,40 @@ class Consumer
     public function __construct()
     {
         $conf = new \RdKafka\Conf();
+        $conf->set('metadata.broker.list', Kafka::$broker);
+        $conf->set('group.id', 'myConsumer1');
+        $conf->set('auto.offset.reset', 'smallest');
 
-        // Set the group id. This is required when storing offsets on the broker
         $conf->setRebalanceCb(function (\RdKafka\KafkaConsumer $kafka, $err, array $partitions = null) {
             switch ($err) {
                 case RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS:
+                    echo 'partitions：';
+                    var_dump($partitions);
                     $kafka->assign($partitions);
                     break;
                 case RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS:
+                    var_dump('partitions：is revoke');
                     $kafka->assign(NULL);
                     break;
                 default:
+                    var_dump(112123123);
                     throw new RunException($err);
             }
         });
-        $conf->set('group.id', 'myConsumer');
-
-        $conf->set('metadata.broker.list', Kafka::$broker);
 
         $conf->set('fetch.wait.max.ms', 50);
         $conf->set('socket.timeout.ms', 1050);//1000ms greater than fetch.wait.max.ms
-
-        $conf->set('internal.termination.signal', SIGIO);
+        // $conf->set('internal.termination.signal', SIGIO);
 
         $this->topic = new \RdKafka\KafkaConsumer($conf);
 
-        $this->topic->subscribe(['test']);
+        $this->topic->subscribe(['testTopic1']);
     }
 
     public function run(): void
     {
         while (true) {
-            $message = $this->topic->consume(120 * 10000);
+            $message = $this->topic->consume(100000);
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
                     var_dump($message);
