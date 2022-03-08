@@ -5,7 +5,7 @@ namespace learn\src\Kafka;
 use learn\src\Config\Kafka;
 use learn\src\Exception\RunException;
 
-class Consumer
+class HighConsumer
 {
     private \RdKafka\KafkaConsumer $topic;
 
