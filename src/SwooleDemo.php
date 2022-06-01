@@ -65,21 +65,31 @@ class SwooleDemo
         $server->start();
     }
 
-    public function http()
+    public function http(): void
     {
         $http = new \Swoole\Http\Server($this->host, $this->port);
 
         $http->on('Request', function ($request, $response) {
+            $router = [
+                '/admin/user/info' => [
+                    'name' => 'lll',
+                    'email' => 'lll@email.com',
+                    'age' => 18
+                ]
+            ];
             if ($request->server['path_info'] === '/favicon.ico' || $request->server['request_uri'] === '/favicon.ico') {
                 $response->end();
                 return;
             }
-            [$controller, $action] = explode('/', trim($request->server['request_uri'], '/'));
             //根据 $controller, $action 映射到不同的控制器类和方法
             $response->header('Content-Type', 'text/html; charset=utf-8');
             try {
-                $controller = '\learn\src\\' . $controller;
-                $response->end((new $controller)->$action($request, $response));
+                if (array_key_exists($request->server['request_uri'], $router)) {
+                    $response->end(json_encode($router[$request->server['request_uri']]));
+                } else {
+                    $response->end('error');
+                }
+
             } catch (\Exception $exception) {
                 $response->end('error');
                 var_dump($exception->getMessage());
