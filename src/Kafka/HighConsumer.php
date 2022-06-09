@@ -4,27 +4,27 @@ namespace learn\src\Kafka;
 
 use learn\src\Config\Kafka;
 use learn\src\Exception\RunException;
+use RdKafka\Conf;
+use RdKafka\KafkaConsumer;
 
 class HighConsumer
 {
-    private \RdKafka\KafkaConsumer $topic;
+    private KafkaConsumer $topic;
 
     public function __construct()
     {
-        $conf = new \RdKafka\Conf();
+        $conf = new Conf();
         $conf->set('metadata.broker.list', Kafka::$broker);
         $conf->set('group.id', 'myConsumer1');
         $conf->set('auto.offset.reset', 'smallest');
 
-        $conf->setRebalanceCb(function (\RdKafka\KafkaConsumer $kafka, $err, array $partitions = null) {
+        $conf->setRebalanceCb(function (KafkaConsumer $kafka, $err, array $partitions = null) {
             switch ($err) {
                 case RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS:
                     echo 'partitions：';
-                    var_dump($partitions);
                     $kafka->assign($partitions);
                     break;
                 case RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS:
-                    var_dump('partitions：is revoke');
                     $kafka->assign(NULL);
                     break;
                 default:
@@ -36,7 +36,7 @@ class HighConsumer
         $conf->set('socket.timeout.ms', 1050);//1000ms greater than fetch.wait.max.ms
         // $conf->set('internal.termination.signal', SIGIO);
 
-        $this->topic = new \RdKafka\KafkaConsumer($conf);
+        $this->topic = new KafkaConsumer($conf);
 
         $this->topic->subscribe(['testTopic1']);
     }

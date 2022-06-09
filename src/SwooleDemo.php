@@ -28,7 +28,7 @@ class SwooleDemo
         return $this;
     }
 
-    public function tcp()
+    public function tcp(): void
     {
         $server = new \Swoole\Server($this->host, $this->port);
 
@@ -51,7 +51,7 @@ class SwooleDemo
         $server->start();
     }
 
-    public function udp()
+    public function udp(): void
     {
         $server = new \Swoole\Server($this->host, $this->port, SWOOLE_PROCESS, SWOOLE_SOCK_UDP);
 
@@ -71,17 +71,12 @@ class SwooleDemo
 
         $http->on('Request', function ($request, $response) {
             $router = [
-                '/admin/user/info' => [
-                    'name' => 'lll',
-                    'email' => 'lll@email.com',
-                    'age' => 18
-                ]
+                '/admin/user/info' => 'MainController@Index'
             ];
             if ($request->server['path_info'] === '/favicon.ico' || $request->server['request_uri'] === '/favicon.ico') {
                 $response->end();
                 return;
             }
-            //根据 $controller, $action 映射到不同的控制器类和方法
             $response->header('Content-Type', 'text/html; charset=utf-8');
             try {
                 if (array_key_exists($request->server['request_uri'], $router)) {
@@ -99,7 +94,7 @@ class SwooleDemo
         $http->start();
     }
 
-    public function websocket()
+    public function websocket(): void
     {
         $ws = new \Swoole\WebSocket\Server($this->host, $this->port);
 
