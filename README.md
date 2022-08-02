@@ -23,7 +23,7 @@
 This project uses [php]() and [nginx]() and [redis](). Go check them out if you don't have them locally installed.
 
 ```sh
-
+composer install
 ```
 
 ## Maintainers
