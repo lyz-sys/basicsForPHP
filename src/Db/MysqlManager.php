@@ -5,7 +5,7 @@ namespace learn\src\Db;
 use ErrorException;
 use learn\src\Config\Mysql as Config;
 
-class MysqliConnect
+class MysqlManager
 {
 
     /**

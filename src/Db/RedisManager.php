@@ -6,13 +6,13 @@ use learn\src\Config\Redis as Config;
 use learn\src\Exception\RunException;
 use ReflectionClass;
 
-class RedisSingle
+class RedisManager
 {
     /**
      * @description Static private variables save the object itself
      * @private
      * */
-    private static RedisSingle $_instance;
+    private static RedisManager $_instance;
 
     /**
      * @description redis object
@@ -60,7 +60,7 @@ class RedisSingle
      * @throws \ReflectionException
      * @throws RunException
      */
-    public function __call(string $method, ...$arguments)
+    public function __call(string $method, array $arguments = [])
     {
         if (!$this->redisReflectionClass->hasMethod($method) || !$this->redisReflectionClass->getMethod($method)->isPublic()) {
             throw new RunException('Method does not exist');

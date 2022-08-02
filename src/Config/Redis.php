@@ -4,7 +4,7 @@ namespace learn\src\Config;
 
 class Redis
 {
-    static public string $host = 'localhost';
+    static public string $host = '127.0.0.1';
 
     static public int $port = 6379;
 

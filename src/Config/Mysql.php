@@ -8,11 +8,11 @@ class Mysql
 
     static public int $port = 3306;
 
-    static public string $database = 'database';
+    static public string $database = 'mysql';
 
-    static public string $username = '';
+    static public string $username = 'root';
 
-    static public string $password = '';
+    static public string $password = 'root';
 
     // static public string $prefix = '';
     //

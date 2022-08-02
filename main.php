@@ -3,7 +3,7 @@
 /**
  * @date 2021-04-21
  * @description learning
- * @author sys-lyz
+ * @author lyzco
  * @brief demo
  * */
 
@@ -15,3 +15,5 @@ error_reporting(E_ALL);
 date_default_timezone_set('Asia/Shanghai');
 
 require_once __DIR__ . '/vendor/autoload.php';
+
+$redis = \learn\src\Facade\Redis::set('test', 123456);

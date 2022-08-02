@@ -1,6 +1,6 @@
 <?php
 
-namespace learn\src;
+namespace learn\src\tools;
 
 class ArraySort
 {

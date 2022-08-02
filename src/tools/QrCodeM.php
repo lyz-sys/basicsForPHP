@@ -1,6 +1,6 @@
 <?php
 
-namespace learn\src;
+namespace learn\src\tools;
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -10,7 +10,7 @@ use Endroid\QrCode\QrCode;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
-class QrCodeTool
+class QrCodeM
 {
 
     public function create(string $path): void

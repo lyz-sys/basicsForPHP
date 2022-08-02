@@ -1,6 +1,6 @@
 <?php
 
-namespace learn\src;
+namespace learn\src\tools;
 
 class FileOperation
 {
@@ -13,11 +13,11 @@ class FileOperation
      */
     public function getFileCountBackWards(string $file, int $num): array
     {
-        if (empty($file) || $num < 1){
+        if (empty($file) || $num < 1) {
             return [];
         }
         $fp = fopen($file, 'rb');
-        if (!$fp){
+        if (!$fp) {
             return [];
         }
         $pos = -2;
