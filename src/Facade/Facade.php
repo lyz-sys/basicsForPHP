@@ -13,7 +13,7 @@ abstract class Facade
      *
      * @var array
      */
-    protected static $resolvedInstance;
+    protected static array $resolvedInstance;
 
     /**
      * Get the registered name of the component.
@@ -86,6 +86,7 @@ abstract class Facade
      * */
     public static function boot(): void
     {
+        // TODO Optimization
         static::$resolvedInstance['mysql'] = new MysqlManager();
         static::$resolvedInstance['redis'] = RedisManager::getInstance();
     }
