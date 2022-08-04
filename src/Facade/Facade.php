@@ -2,7 +2,8 @@
 
 namespace learn\src\Facade;
 
-use learn\src\Db\MysqlManager;
+use Carbon\Carbon;
+use learn\src\Db\PdoMysqlManager;
 use learn\src\Db\RedisManager;
 use learn\src\Exception\RunException;
 
@@ -84,11 +85,12 @@ abstract class Facade
     /**
      * Load container.
      * */
-    public static function boot(): void
+    private static function boot(): void
     {
         // TODO Optimization
-        static::$resolvedInstance['mysql'] = new MysqlManager();
+        static::$resolvedInstance['mysql'] = new PdoMysqlManager();
         static::$resolvedInstance['redis'] = RedisManager::getInstance();
+        static::$resolvedInstance['date'] = new Carbon();
     }
 
 }
