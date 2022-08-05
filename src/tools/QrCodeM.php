@@ -9,12 +9,21 @@ use Endroid\QrCode\Label\Label;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
+use learn\src\Exception\RunException;
 
 class QrCodeM
 {
 
+    /**
+     * @throws RunException
+     */
     public function create(string $path): void
     {
+        $path = realpath($path);
+        if (!$path){
+           throw new RunException('The file does not exist.');
+        }
+
         $writer = new PngWriter();
 
         // Create QR code
@@ -43,7 +52,7 @@ class QrCodeM
         // echo $result->getString();
 
         // Save it to a file
-        $result->saveToFile($path . '/tests/qrcode.png');
+        $result->saveToFile($path . '/qrcode.png');
 
         // Generate a data URI to include image data inline (i.e. inside an <img> tag)
         // $dataUri = $result->getDataUri();

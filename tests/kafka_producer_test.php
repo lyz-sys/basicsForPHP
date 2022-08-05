@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once 'tests.php';
 
 $producer = new \learn\src\Kafka\Producer();
 

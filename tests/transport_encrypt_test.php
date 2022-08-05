@@ -3,7 +3,7 @@
 use learn\src\Transport\Decrypt;
 use learn\src\Transport\Encrypt;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once 'tests.php';
 
 $encrypt = new Encrypt();
 $decrypt = new Decrypt();
