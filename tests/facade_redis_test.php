@@ -1,13 +1,13 @@
 <?php
 
 /**
- * facade_redis
+ * facade_redis_test
  * @createdAt 2022-08-09
  * */
 
 require_once 'tests.php';
 
-$set_result = \learn\src\Facade\Redis::set('test', 123456);
+\learn\src\Facade\Redis::set('test', 123456);
 $res = \learn\src\Facade\Redis::get('test');
 var_dump($res);
 
@@ -22,3 +22,5 @@ var_dump($res);
 
 \learn\src\Facade\Redis::del('test');
 \learn\src\Facade\Redis::del('hawaii');
+
+
