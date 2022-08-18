@@ -9,7 +9,7 @@
 </body>
 
 <script type="text/javascript">
-    var wsServer = 'ws://127.0.0.1:9501';
+    var wsServer = 'ws://127.0.0.1:9502/ws';
     var websocket = new WebSocket(wsServer);
     websocket.onopen = function (evt) {
         console.log("Connected to WebSocket server.");
@@ -21,6 +21,10 @@
 
     websocket.onmessage = function (evt) {
         console.log('Retrieved data from server: ' + evt.data);
+        var res = JSON.parse(evt.data);
+        if (res.type === 20){
+            websocket.send(evt.data)
+        }
     };
 
     websocket.onerror = function (evt, e) {

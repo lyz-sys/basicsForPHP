@@ -101,6 +101,7 @@ class SwooleDemo
         //监听WebSocket连接打开事件
         $ws->on('Open', function ($ws, $request) {
             $ws->push($request->fd, "hello, welcome\n");
+            echo 'connect:' . $request->fd . "\n";
         });
 
         //监听WebSocket消息事件

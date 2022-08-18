@@ -28,7 +28,7 @@ composer install
 
 ## Maintainers
 
-[@lyz-sys](https://github.com/lyz-sys).
+[@lyzco](https://github.com/lyzco).
 
 Learning without thinking is lost, thinking without learning is dangerous
 

@@ -19,8 +19,5 @@ var_dump($res);
 $res = \learn\src\Facade\Redis::geoDist("hawaii", "Honolulu", "San Francisco");
 var_dump($res);
 
-
 \learn\src\Facade\Redis::del('test');
 \learn\src\Facade\Redis::del('hawaii');
-
-
