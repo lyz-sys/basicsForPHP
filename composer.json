@@ -20,7 +20,8 @@
     "carbon-cli/carbon-cli": "^1.2",
     "endroid/qr-code": "^4.4",
     "nesbot/carbon": "^2.54",
-    "phpmailer/phpmailer": "^6.6"
+    "phpmailer/phpmailer": "^6.6",
+    "phpoffice/phpspreadsheet": "^1.28"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"

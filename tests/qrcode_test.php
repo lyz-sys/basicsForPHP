@@ -5,7 +5,7 @@
  * @createdAt 2022-08-05
  * */
 
-require_once 'tests.php';
+require_once __DIR__ . '/tests.php';
 
 $qrcode = new learn\src\tools\QrCodeM();
 

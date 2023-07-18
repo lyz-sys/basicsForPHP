@@ -5,7 +5,7 @@
  * @createdAt 2022-08-18
  * */
 
-require_once 'tests.php';
+require_once __DIR__ . '/tests.php';
 
 $ws = new \learn\src\SwooleDemo();
 

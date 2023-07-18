@@ -5,7 +5,7 @@
  * @createdAt 2022-10-09
  * */
 
-require_once 'tests.php';
+require_once __DIR__ . '/tests.php';
 
 $email = new \learn\src\tools\Email();
 

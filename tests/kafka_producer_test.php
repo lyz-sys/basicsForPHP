@@ -5,7 +5,7 @@
  * @createdAt 2022-02-16
  * */
 
-require_once 'tests.php';
+require_once __DIR__ . '/tests.php';
 
 $producer = new \learn\src\Kafka\Producer();
 

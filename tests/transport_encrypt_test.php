@@ -8,7 +8,7 @@
 use learn\src\Transport\Decrypt;
 use learn\src\Transport\Encrypt;
 
-require_once 'tests.php';
+require_once __DIR__ . '/tests.php';
 
 $encrypt = new Encrypt();
 $decrypt = new Decrypt();

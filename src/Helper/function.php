@@ -27,3 +27,13 @@ function wait(int $seconds): int
     return $seconds + $secondsLeft;
 }
 
+function formatBytes($size, $decimals = 2): string
+{
+    $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+
+    for ($i = 0; $size >= 1024 && $i < 5; $i++) {
+        $size /= 1024;
+    }
+
+    return round($size, $decimals) . ' ' . $units[$i];
+}

@@ -5,7 +5,7 @@
  * @createdAt 2022-08-09
  * */
 
-require_once 'tests.php';
+require_once __DIR__ . '/tests.php';
 
 \learn\src\Facade\Redis::set('test', 123456);
 $res = \learn\src\Facade\Redis::get('test');
