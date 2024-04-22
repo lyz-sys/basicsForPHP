@@ -26,6 +26,12 @@ This project uses [php]() and [nginx]() and [redis](). Go check them out if you 
 composer install
 ```
 
+## Others
+
+If you find this project helpful, please consider giving it a star.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=lyzco/basicsPHP&type=Date)](https://star-history.com/#lyzco/basicsPHP&Date)
+
 ## Maintainers
 
 [@lyzco](https://github.com/lyzco).

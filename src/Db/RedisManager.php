@@ -57,6 +57,7 @@ class RedisManager
     }
 
     /**
+     * @description get redis object
      * @throws \ReflectionException
      * @throws RunException
      */
@@ -69,6 +70,10 @@ class RedisManager
         return $this->_redis->$method(...$arguments);
     }
 
+    /**
+     * @description Private clone method to prevent cloning of objects
+     * @private
+     * */
     private function __clone()
     {
     }
